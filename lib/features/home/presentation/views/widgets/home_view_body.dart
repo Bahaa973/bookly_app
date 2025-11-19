@@ -1,3 +1,4 @@
+import 'package:bookly_app/core/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'custom_app_bar.dart';
@@ -19,10 +20,7 @@ class HomeViewBody extends StatelessWidget {
             height: 50,
             child: Text(
               'Best Seller',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Styles.textStyle18,
             ),
           ),
           BestSellerListViewItem(),
