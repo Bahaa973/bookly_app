@@ -20,7 +20,7 @@ class HomeViewBody extends StatelessWidget {
             child: Text(
               'Best Seller',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
             ),
