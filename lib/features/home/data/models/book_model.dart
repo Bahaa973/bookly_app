@@ -23,10 +23,10 @@ class BookModel extends Equatable {
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
     return BookModel(
-      kind: json["kind"],
-      id: json["id"],
-      etag: json["etag"],
-      selfLink: json["selfLink"],
+      kind: json["kind"] as String?,
+      id: json["id"]  as String?,
+      etag: json["etag"]  as String?,
+      selfLink: json["selfLink"]  as String?,
       volumeInfo: json["volumeInfo"] != null
           ? VolumeInfo.fromJson(json["volumeInfo"])
           : null,
@@ -112,27 +112,32 @@ class VolumeInfo extends Equatable {
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) {
     return VolumeInfo(
-      title: json["title"],
-      authors:
-          json["authors"] != null ? List<String>.from(json["authors"]) : null,
-      publisher: json["publisher"],
-      publishedDate: json["publishedDate"],
-      description: json["description"],
-      industryIdentifiers: json["industryIdentifiers"] != null
+      title: json["title"]  as String?,
+      authors: json["authors"] is List
+          ? List<String>.from(json["authors"])
+          : json["authors"] is String
+          ? [json["authors"]]
+          : null,
+      publisher: json["publisher"]  as String?,
+      publishedDate: json["publishedDate"]  as String?,
+      description: json["description"]  as String?,
+      industryIdentifiers: json["industryIdentifiers"] is List
           ? (json["industryIdentifiers"] as List)
-              .map((e) => IndustryIdentifier.fromJson(e))
-              .toList()
+          .map((e) => IndustryIdentifier.fromJson(e))
+          .toList()
           : null,
       readingModes: json["readingModes"] != null
           ? ReadingModes.fromJson(json["readingModes"])
           : null,
-      pageCount: json["pageCount"],
-      printType: json["printType"],
-      categories: json["categories"] != null
+      pageCount: json["pageCount"] ,
+      printType: json["printType"]  as String?,
+      categories: json["categories"] is List
           ? List<String>.from(json["categories"])
+          : json["categories"] is String
+          ? [json["categories"]]
           : null,
-      maturityRating: json["maturityRating"],
-      allowAnonLogging: json["allowAnonLogging"],
+      maturityRating: json["maturityRating"]  as String?,
+      allowAnonLogging: json["allowAnonLogging"] ,
       contentVersion: json["contentVersion"],
       panelizationSummary: json["panelizationSummary"] != null
           ? PanelizationSummary.fromJson(json["panelizationSummary"])
@@ -140,10 +145,10 @@ class VolumeInfo extends Equatable {
       imageLinks: json["imageLinks"] != null
           ? ImageLinks.fromJson(json["imageLinks"])
           : null,
-      language: json["language"],
-      previewLink: json["previewLink"],
-      infoLink: json["infoLink"],
-      canonicalVolumeLink: json["canonicalVolumeLink"],
+      language: json["language"]  as String?,
+      previewLink: json["previewLink"]  as String?,
+      infoLink: json["infoLink"]  as String?,
+      canonicalVolumeLink: json["canonicalVolumeLink"]  as String?,
     );
   }
 
@@ -207,8 +212,8 @@ class IndustryIdentifier extends Equatable {
 
   factory IndustryIdentifier.fromJson(Map<String, dynamic> json) {
     return IndustryIdentifier(
-      type: json["type"],
-      identifier: json["identifier"],
+      type: json["type"]  as String?,
+      identifier: json["identifier"]  as String?,
     );
   }
 
@@ -234,8 +239,8 @@ class ReadingModes extends Equatable {
 
   factory ReadingModes.fromJson(Map<String, dynamic> json) {
     return ReadingModes(
-      text: json["text"],
-      image: json["image"],
+      text: json["text"] ,
+      image: json["image"] ,
     );
   }
 
@@ -288,8 +293,8 @@ class ImageLinks extends Equatable {
 
   factory ImageLinks.fromJson(Map<String, dynamic> json) {
     return ImageLinks(
-      smallThumbnail: json["smallThumbnail"],
-      thumbnail: json["thumbnail"],
+      smallThumbnail: json["smallThumbnail"]  as String?,
+      thumbnail: json["thumbnail"]  as String?,
     );
   }
 
@@ -317,9 +322,9 @@ class SaleInfo extends Equatable {
 
   factory SaleInfo.fromJson(Map<String, dynamic> json) {
     return SaleInfo(
-      country: json["country"],
-      saleability: json["saleability"],
-      isEbook: json["isEbook"],
+      country: json["country"]  as String?,
+      saleability: json["saleability"]  as String?,
+      isEbook: json["isEbook"] ,
     );
   }
 
@@ -362,16 +367,16 @@ class AccessInfo extends Equatable {
 
   factory AccessInfo.fromJson(Map<String, dynamic> json) {
     return AccessInfo(
-      country: json["country"],
-      viewability: json["viewability"],
-      embeddable: json["embeddable"],
-      publicDomain: json["publicDomain"],
-      textToSpeechPermission: json["textToSpeechPermission"],
+      country: json["country"]  as String?,
+      viewability: json["viewability"]  as String?,
+      embeddable: json["embeddable"] ,
+      publicDomain: json["publicDomain"] ,
+      textToSpeechPermission: json["textToSpeechPermission"] as String?,
       pdf: json["pdf"] != null ? PdfInfo.fromJson(json["pdf"]) : null,
       epub: json["epub"] != null ? EpubInfo.fromJson(json["epub"]) : null,
-      webReaderLink: json["webReaderLink"],
-      accessViewStatus: json["accessViewStatus"],
-      quoteSharingAllowed: json["quoteSharingAllowed"],
+      webReaderLink: json["webReaderLink"] as String?,
+      accessViewStatus: json["accessViewStatus"] as String?,
+      quoteSharingAllowed: json["quoteSharingAllowed"] ,
     );
   }
 
@@ -417,7 +422,7 @@ class PdfInfo extends Equatable {
   factory PdfInfo.fromJson(Map<String, dynamic> json) {
     return PdfInfo(
       isAvailable: json["isAvailable"],
-      acsTokenLink: json["acsTokenLink"],
+      acsTokenLink: json["acsTokenLink"] as String?,
     );
   }
 
@@ -455,7 +460,7 @@ class SearchInfo extends Equatable {
   const SearchInfo({this.textSnippet});
 
   factory SearchInfo.fromJson(Map<String, dynamic> json) {
-    return SearchInfo(textSnippet: json["textSnippet"]);
+    return SearchInfo(textSnippet: json["textSnippet"] as String?);
   }
 
   Map<String, dynamic> toJson() {
