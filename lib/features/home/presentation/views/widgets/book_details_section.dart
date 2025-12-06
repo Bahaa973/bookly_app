@@ -1,3 +1,4 @@
+import 'package:bookly_app/features/home/data/models/book_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
@@ -6,7 +7,9 @@ import 'book_rating.dart';
 import 'custom_book_image.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key});
+  const BookDetailsSection({super.key, required this.books});
+
+  final BookModel books;
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +18,20 @@ class BookDetailsSection extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .2),
-          child: const CustomBookImage(
-            imageUrl:
-                'https://media.gettyimages.com/id/157482029/photo/stack-of-books.jpg?s=612x612&w=gi&k=20&c=_Yaofm8sZLZkKs1eMkv-zhk8K4k5u0g0fJuQrReWfdQ=',
+          child: CustomBookImage(
+            imageUrl: books.volumeInfo.imageLinks?.thumbnail ??
+                'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930',
           ),
         ),
         const SizedBox(
           height: 43,
         ),
         Text(
-          'The Jungle Book',
+          books.volumeInfo.title ?? '',
           style: Styles.textStyle30.copyWith(
             fontWeight: FontWeight.bold,
           ),
+          textAlign: TextAlign.center,
         ),
         const SizedBox(
           height: 6,
@@ -35,7 +39,7 @@ class BookDetailsSection extends StatelessWidget {
         Opacity(
           opacity: .7,
           child: Text(
-            'Rudyard Kipling',
+            books.volumeInfo.authors?[0] ?? '',
             style: Styles.textStyle18.copyWith(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w500,
@@ -46,8 +50,8 @@ class BookDetailsSection extends StatelessWidget {
           height: 16,
         ),
         const BookRating(
-          rating: 2,
-          count: 5,
+          rating: 0,
+          count: 0,
           mainAxisAlignment: MainAxisAlignment.center,
         ),
         const SizedBox(
