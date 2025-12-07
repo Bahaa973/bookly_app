@@ -1,17 +1,21 @@
+import 'package:bookly_app/features/home/data/models/book_model.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
 
 class BookAction extends StatelessWidget {
-  const BookAction({super.key});
+  const BookAction({super.key, required this.bookModel});
+
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
         children: [
-          Expanded(
+          const Expanded(
             child: CustomButton(
               text: 'Free',
               textColor: Colors.black,
@@ -24,11 +28,20 @@ class BookAction extends StatelessWidget {
           ),
           Expanded(
             child: CustomButton(
-              text: 'Free Preview',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        WebPage(url: bookModel.volumeInfo.previewLink!),
+                  ),
+                );
+              },
+              text: 'Preview',
               textColor: Colors.white,
               fontSize: 16,
-              backgroundColor: Color(0xffEF8262),
-              borderRadius: BorderRadius.only(
+              backgroundColor: const Color(0xffEF8262),
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
@@ -36,6 +49,26 @@ class BookAction extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class WebPage extends StatelessWidget {
+  final String url;
+
+  const WebPage({super.key, required this.url});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse(url));
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Website'),
+      ),
+      body: WebViewWidget(controller: controller),
     );
   }
 }
