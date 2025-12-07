@@ -29,15 +29,27 @@ class BookAction extends StatelessWidget {
           Expanded(
             child: CustomButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        WebPage(url: bookModel.volumeInfo.previewLink!),
-                  ),
-                );
+                final uri = Uri.tryParse(bookModel.volumeInfo.previewLink!);
+                if (uri != null &&
+                    uri.isAbsolute &&
+                    (uri.scheme == 'http' || uri.scheme == 'https')) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          WebPage(url: bookModel.volumeInfo.previewLink!),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                          'cannot launch ${bookModel.volumeInfo.previewLink!}'),
+                    ),
+                  );
+                }
               },
-              text: 'Preview',
+              text: getText(bookModel),
               textColor: Colors.white,
               fontSize: 16,
               backgroundColor: const Color(0xffEF8262),
@@ -70,5 +82,13 @@ class WebPage extends StatelessWidget {
       ),
       body: WebViewWidget(controller: controller),
     );
+  }
+}
+
+String getText(BookModel bookModel) {
+  if (bookModel.volumeInfo.previewLink == null) {
+    return 'Not Available';
+  } else {
+    return 'Preview';
   }
 }
