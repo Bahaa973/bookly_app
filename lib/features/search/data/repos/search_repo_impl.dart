@@ -1,9 +1,10 @@
 import 'package:bookly_app/core/errors/failures.dart';
 import 'package:bookly_app/core/utils/api_service.dart';
-import 'package:bookly_app/features/home/data/models/book_model.dart';
 import 'package:bookly_app/features/search/data/repos/search_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+
+import '../../../../core/model/book_model.dart';
 
 class SearchRepoImpl implements SearchRepo {
   final ApiService apiService;

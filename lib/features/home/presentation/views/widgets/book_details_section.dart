@@ -1,6 +1,6 @@
-import 'package:bookly_app/features/home/data/models/book_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/model/book_model.dart';
 import '../../../../../core/utils/styles.dart';
 import 'book_action.dart';
 import 'book_rating.dart';

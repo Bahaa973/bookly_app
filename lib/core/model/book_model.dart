@@ -29,7 +29,7 @@ class BookModel extends Equatable {
       selfLink: json["selfLink"]  as String?,
       volumeInfo: VolumeInfo.fromJson(json["volumeInfo"]),
       saleInfo:
-          json["saleInfo"] != null ? SaleInfo.fromJson(json["saleInfo"]) : null,
+      json["saleInfo"] != null ? SaleInfo.fromJson(json["saleInfo"]) : null,
       accessInfo: json["accessInfo"] != null
           ? AccessInfo.fromJson(json["accessInfo"])
           : null,
@@ -54,15 +54,15 @@ class BookModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        kind,
-        id,
-        etag,
-        selfLink,
-        volumeInfo,
-        saleInfo,
-        accessInfo,
-        searchInfo,
-      ];
+    kind,
+    id,
+    etag,
+    selfLink,
+    volumeInfo,
+    saleInfo,
+    accessInfo,
+    searchInfo,
+  ];
 }
 
 class VolumeInfo extends Equatable {
@@ -158,7 +158,7 @@ class VolumeInfo extends Equatable {
       "publishedDate": publishedDate,
       "description": description,
       "industryIdentifiers":
-          industryIdentifiers?.map((e) => e.toJson()).toList(),
+      industryIdentifiers?.map((e) => e.toJson()).toList(),
       "readingModes": readingModes?.toJson(),
       "pageCount": pageCount,
       "printType": printType,
@@ -177,26 +177,26 @@ class VolumeInfo extends Equatable {
 
   @override
   List<Object?> get props => [
-        title,
-        authors,
-        publisher,
-        publishedDate,
-        description,
-        industryIdentifiers,
-        readingModes,
-        pageCount,
-        printType,
-        categories,
-        maturityRating,
-        allowAnonLogging,
-        contentVersion,
-        panelizationSummary,
-        imageLinks,
-        language,
-        previewLink,
-        infoLink,
-        canonicalVolumeLink,
-      ];
+    title,
+    authors,
+    publisher,
+    publishedDate,
+    description,
+    industryIdentifiers,
+    readingModes,
+    pageCount,
+    printType,
+    categories,
+    maturityRating,
+    allowAnonLogging,
+    contentVersion,
+    panelizationSummary,
+    imageLinks,
+    language,
+    previewLink,
+    infoLink,
+    canonicalVolumeLink,
+  ];
 }
 
 class IndustryIdentifier extends Equatable {
@@ -395,17 +395,17 @@ class AccessInfo extends Equatable {
 
   @override
   List<Object?> get props => [
-        country,
-        viewability,
-        embeddable,
-        publicDomain,
-        textToSpeechPermission,
-        pdf,
-        epub,
-        webReaderLink,
-        accessViewStatus,
-        quoteSharingAllowed,
-      ];
+    country,
+    viewability,
+    embeddable,
+    publicDomain,
+    textToSpeechPermission,
+    pdf,
+    epub,
+    webReaderLink,
+    accessViewStatus,
+    quoteSharingAllowed,
+  ];
 }
 
 class PdfInfo extends Equatable {
